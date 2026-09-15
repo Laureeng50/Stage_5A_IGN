@@ -4,7 +4,6 @@ Ce dépôt regroupe les principaux scripts, données dérivées et résultats pr
 
 Le travail porte sur le traitement de vidéos issues des GeoDanceHive avec le Waggle Phase Mapper (WPM), puis sur l'analyse des variations temporelles de l'activité de recrutement détectée et de leurs relations avec les conditions météorologiques.
 
-Le corpus étudié couvre les années 2022 à 2024 pour les ruches 2202, 2203 et 2206. Une vidéo de dix minutes par heure a été retenue pour le traitement massif, soit 8 853 vidéos.
 
 ## Organisation
 
