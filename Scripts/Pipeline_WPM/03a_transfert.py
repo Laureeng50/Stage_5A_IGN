@@ -1,26 +1,28 @@
-# Prépare un lot local, transfère les vidéos et les fichiers nécessaires vers le serveur puis lance le batch WPM.
 from pathlib import Path
 from urllib.parse import quote
+import os
 import shutil
 import subprocess
 import sys
 import time
 import pandas as pd
 
-base = Path(r"D:\Algorithme\pipeline_wpm")
+repo = Path(__file__).resolve().parents[2]
+base = Path(__file__).resolve().parent
 tmp = base / "en_cours"
-user = "LEnguehard"
-server = "DEL2304S004"
-winscp = Path(r"C:\Program Files (x86)\WinSCP\WinSCP.com")
-mdp_file = base / "mdp_winscp.txt"
-remote = "/home/LEnguehard/code/DANSE/pipeline_wpm"
+user = os.environ.get("WPM_USER", "USER")
+server = os.environ.get("WPM_SERVER", "SERVER")
+winscp = Path(os.environ.get("WINSCP_PATH", r"C:\Program Files (x86)\WinSCP\WinSCP.com"))
+mdp_file = Path(os.environ.get("WPM_PASSWORD_FILE", str(base / "mdp_winscp.txt")))
+remote = os.environ.get("WPM_REMOTE", "/path/to/pipeline_wpm")
+remote_python = os.environ.get("WPM_REMOTE_PYTHON", "python")
 script_serveur = base / "03b_batch_serveur.py"
 lot_path = Path(sys.argv[1])
+hyper_dir = repo / "Calibration" / "Hyperparametres"
 
 if tmp.exists():
     shutil.rmtree(tmp)
 tmp.mkdir()
-
 
 def lancer_winscp(script, essais=20, attente=60):
     for tentative in range(1, essais + 1):
@@ -30,14 +32,13 @@ def lancer_winscp(script, essais=20, attente=60):
         print(f"Connexion échouée ({tentative}/{essais})")
         if tentative < essais:
             time.sleep(attente)
-    raise RuntimeError("Impossible de contacter le serveur.")
-
+    raise RuntimeError("Impossible de contacter le serveur")
 
 df = pd.read_csv(lot_path, sep=None, engine="python", encoding="utf-8-sig")
 df.columns = [c.replace("\ufeff", "").strip() for c in df.columns]
 
 nom_hyperparam = str(df["hyperparametre_file"].iloc[0])
-hyperparam = base / "hyperparametres" / nom_hyperparam
+hyperparam = hyper_dir / nom_hyperparam
 if not hyperparam.exists():
     raise FileNotFoundError(hyperparam)
 
@@ -59,9 +60,9 @@ lancer.write_text(
     "if [ -f batch_started.txt ]; then exit 0; fi\n"
     "touch batch_started.txt\n"
     "rm -f resultats.csv status.csv batch.log nohup_batch.log pipeline_ok.txt\n"
-    "nohup /home/LEnguehard/code/DANSE/.venv/bin/python 03b_batch_serveur.py > nohup_batch.log 2>&1 &\n",
+    f"nohup {remote_python} 03b_batch_serveur.py > nohup_batch.log 2>&1 &\n",
     encoding="utf-8",
-    newline="\n",
+    newline="\n"
 )
 
 mdp = quote(mdp_file.read_text(encoding="utf-8").strip(), safe="")
@@ -75,7 +76,7 @@ lignes = [
     f'put "{tmp_lot}" "{remote}/lot.csv"',
     f'put "{hyperparam}" "{remote}/hyperparametres.json"',
     f'put "{script_serveur}" "{remote}/03b_batch_serveur.py"',
-    f'put "{lancer}" "{remote}/lancer_batch.sh"',
+    f'put "{lancer}" "{remote}/lancer_batch.sh"'
 ]
 lignes.extend(f'put "{video}" "{remote}/videos/"' for video in videos)
 lignes.append("exit")
@@ -87,16 +88,14 @@ print("Hyperparamètres :", nom_hyperparam)
 lancer_winscp(script_transfert)
 
 script_lancement = tmp / "winscp_lancement.txt"
-script_lancement.write_text(
-    "\n".join([
-        "option batch abort",
-        "option confirm off",
-        f"open scp://{user}:{mdp}@{server}/ -hostkey=*",
-        f"call chmod +x {remote}/lancer_batch.sh",
-        f"call {remote}/lancer_batch.sh",
-        "exit",
-    ]),
-    encoding="utf-8",
-)
+script_lancement.write_text("\n".join([
+    "option batch abort",
+    "option confirm off",
+    f"open scp://{user}:{mdp}@{server}/ -hostkey=*",
+    f"call chmod +x {remote}/lancer_batch.sh",
+    f"call {remote}/lancer_batch.sh",
+    "exit"
+]), encoding="utf-8")
+
 lancer_winscp(script_lancement)
-print("Transfert terminé et batch lancé.")
+print("Transfert terminé et batch lancé")

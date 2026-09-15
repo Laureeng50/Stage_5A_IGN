@@ -1,9 +1,11 @@
-# Sélectionne une vidéo exploitable par heure dans chacun des neuf groupes et crée les lots de 50 avec leurs hyperparamètres WPM.
 from pathlib import Path
 import pandas as pd
 
-base = Path(r"D:\Algorithme\pipeline_wpm")
-table = base / "tables" / "Table_fusionnee_VF_videos.csv"
+repo = Path(__file__).resolve().parents[2]
+base = Path(__file__).resolve().parent
+table = repo / "Données" / "BDD_inventaire.csv"
+hyper_dir = repo / "Calibration" / "Hyperparametres"
+dossier_lots = base / "lots"
 taille_lot = 50
 
 groupes = [
@@ -15,39 +17,32 @@ groupes = [
     ("nap-mag12552202", "2202_OK", ["ok"], "best_hyperparameters_DX20_R3.json"),
     ("nap-mag12552203", "2203_OK", ["ok"], "best_hyperparameters_2203_DUR05_ED40_DX15_SLOPE2_35_GAP30_SR30.json"),
     ("nap-mag12552203", "2203_FLOU", ["ok mais qualité vidéo faible (flou)"], "best_hyperparameters_2203_DUR05_ED40_DX15_SLOPE2_35_GAP30_SR30.json"),
-    ("nap-mag12552206", "2206_OK", ["ok"], "best_hyperparameters_2206_T1_DUR03_ED50_DX10_SLOPE1_60_GAP40_SR20.json"),
+    ("nap-mag12552206", "2206_OK", ["ok"], "best_hyperparameters_2206_T1_DUR03_ED50_DX10_SLOPE1_60_GAP40_SR20.json")
 ]
 
-df_total = pd.read_csv(table)
+df_total = pd.read_csv(table, low_memory=False)
 df_total["commentaires"] = df_total["commentaires"].astype(str).str.replace("\xa0", " ", regex=False).str.strip()
 df_total["Exploitabilité"] = df_total["Exploitabilité"].astype(str).str.strip()
-
 resume = []
 
 for ruche, categorie, commentaires, hyperparam_file in groupes:
-    fichier_hyperparam = base / "hyperparametres" / hyperparam_file
+    fichier_hyperparam = hyper_dir / hyperparam_file
     if not fichier_hyperparam.exists():
-        raise FileNotFoundError(f"Hyperparamètre introuvable : {fichier_hyperparam}")
+        raise FileNotFoundError(fichier_hyperparam)
 
-    df = df_total[
-        (df_total["ruche"] == ruche)
-        & (df_total["commentaires"].isin(commentaires))
-        & (df_total["Exploitabilité"] == "Exploitable")
-    ].copy()
-
+    df = df_total[(df_total["ruche"] == ruche) & (df_total["commentaires"].isin(commentaires)) & (df_total["Exploitabilité"] == "Exploitable")].copy()
     if df.empty:
-        raise ValueError(f"Aucune vidéo trouvée pour {categorie}")
+        raise ValueError("Aucune vidéo trouvée pour " + categorie)
 
     df = df.sort_values(["date", "heure"])
     df["heure_tmp"] = df["heure"].astype(str).str[:2]
     df = df.drop_duplicates(["ruche", "date", "heure_tmp"], keep="first").drop(columns="heure_tmp")
 
     hyperparam = Path(hyperparam_file).stem
-    out = base / "lots" / f"{categorie}_{hyperparam}" / f"lots_{taille_lot}"
+    out = dossier_lots / f"{categorie}_{hyperparam}" / f"lots_{taille_lot}"
     out.mkdir(parents=True, exist_ok=True)
-
-    for ancien_lot in out.glob("*.csv"):
-        ancien_lot.unlink()
+    for ancien in out.glob("*.csv"):
+        ancien.unlink()
 
     for i in range(0, len(df), taille_lot):
         lot = df.iloc[i:i + taille_lot].copy()
@@ -55,7 +50,6 @@ for ruche, categorie, commentaires, hyperparam_file in groupes:
         date_debut = str(lot["date"].iloc[0])[:10]
         date_fin = str(lot["date"].iloc[-1])[:10]
         nom_lot = f"{categorie}_LOT_{num:03d}_{len(lot)}_{date_debut}_{date_fin}"
-
         lot["nom_lot"] = nom_lot
         lot["taille_lot"] = taille_lot
         lot["hyperparametre"] = hyperparam
@@ -68,11 +62,8 @@ for ruche, categorie, commentaires, hyperparam_file in groupes:
     print(categorie, ":", len(df), "vidéos,", nb_lots, "lots")
 
 resume = pd.DataFrame(resume)
-resume.to_csv(base / "lots" / "resume_creation_lots.csv", sep=";", index=False, encoding="utf-8-sig")
+dossier_lots.mkdir(exist_ok=True)
+resume.to_csv(dossier_lots / "resume_creation_lots.csv", sep=";", index=False, encoding="utf-8-sig")
 
-total_videos = int(resume["videos"].sum())
-print("\nTotal vidéos :", total_videos)
-print("Total lots :", int(resume["lots"].sum()))
-
-if total_videos != 8853:
-    raise RuntimeError(f"Le total attendu est 8853 vidéos, obtenu : {total_videos}")
+if int(resume["videos"].sum()) != 8853:
+    raise RuntimeError("Le total attendu est 8853 vidéos")
