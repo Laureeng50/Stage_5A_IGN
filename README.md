@@ -89,9 +89,8 @@ Les scripts de `Scripts/Pipeline_WPM/` correspondent à la chaîne utilisée pou
 | `03d_nettoyage.py` | Suppression des fichiers temporaires du serveur après validation de la récupération. |
 | `04_lancer_tous_les_lots.py` | Parcours de l'ensemble des lots et reprise uniquement des lots non validés. |
 
-Les fichiers `inventaire_videos.csv` et `Table_qualite_videos.xlsx` utilisés par le premier script ne sont pas versionnés, car `BDD_inventaire.csv` est directement fourni dans le dépôt.
 
-Les paramètres propres au serveur ne sont pas enregistrés dans le dépôt. Les scripts utilisent les variables d'environnement `WPM_USER`, `WPM_SERVER`, `WPM_REMOTE`, `WPM_REMOTE_PYTHON`, `WPM_PASSWORD_FILE` et, si nécessaire, `WINSCP_PATH` et `WPM_COMMAND`.
+
 
 ## Scripts Python d'analyse
 
@@ -121,16 +120,15 @@ Les analyses statistiques principales sont regroupées dans `Scripts/Analyse_R/`
 
 Les scripts R utilisent des chemins relatifs et doivent être lancés depuis la racine du dépôt.
 
-## Dépendances principales
+## Bibliothèques principales
 
 Python : `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `statsmodels`.
 
 R : `glmmTMB`, `mgcv`, `DHARMa`, `splines`, `ggplot2`.
 
-Le traitement vidéo nécessite également le Waggle Phase Mapper.
 
 ## Données archivées
 
-Les vidéos de calibration et les fichiers de données destinés à l'archivage scientifique sont déposés séparément sur Zenodo.
+Les vidéos utilisées pour la calibration manuelle sont déposées sur Zenodo.
 
 DOI Zenodo : à ajouter.
