@@ -6,8 +6,8 @@ meteo <- read.csv(file.path("Données", "dataset_meteo_master.csv"), sep = ";")
 out <- file.path("Resultats", "analyse_pluie")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 
-df$datetime_video <- as.POSIXct(df$datetime_video)
-meteo$datetime <- as.POSIXct(meteo$datetime)
+df$datetime_video <- as.POSIXct(df$datetime_video, format = "%Y-%m-%d %H:%M:%S", tz = "Europe/Paris")
+meteo$datetime <- as.POSIXct(meteo$datetime, format = "%d/%m/%Y %H:%M", tz = "Europe/Paris")
 meteo$pluie_1h_C <- as.numeric(meteo$pluie_1h_C)
 meteo <- meteo[!is.na(meteo$datetime) & !is.na(meteo$pluie_1h_C), ]
 meteo <- meteo[order(meteo$datetime), ]

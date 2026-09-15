@@ -17,7 +17,8 @@ qualite["date"] = pd.to_datetime(qualite["date"], dayfirst=True, errors="coerce"
 inventaire["heure"] = inventaire["nom_fichier"].str.extract(r"_(\d+-\d+-\d+)_csi0")[0].str.replace("-", ":", regex=False)
 
 videos = inventaire.merge(qualite, on=["ruche", "date"], how="left")
-videos.to_csv(sortie_path, index=False, encoding="utf-8-sig")
+videos["chemin"] = videos["chemin"].astype(str).str.replace(r"^[A-Za-z]:[\\\\/]+", "", regex=True).str.replace("\\\\", "/", regex=False)
+videos.to_csv(sortie_path, sep=";", index=False, encoding="utf-8-sig")
 
 print("Vidéos dans l'inventaire :", len(inventaire))
 print("Vidéos après fusion :", len(videos))

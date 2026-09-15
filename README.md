@@ -67,6 +67,11 @@ Série météorologique harmonisée construite à partir des données Infoclimat
 Jeu de données utilisé pour les analyses temporelles et météorologiques. Chaque ligne correspond à une vidéo et regroupe les sorties WPM, les informations temporelles, le groupe technique et les variables météorologiques associées.
 
 
+
+### Fichiers sources non inclus
+
+Les fichiers bruts utilisés pour construire l'inventaire et les séries météorologiques ne sont pas versionnés dans ce dépôt. Les jeux de données préparés nécessaires aux analyses sont fournis dans `Données/`. Les scripts de préparation sont conservés pour documenter les traitements réalisés.
+
 ## Résultats WPM
 
 ### `resultats_WPM_complet.csv`
@@ -77,7 +82,7 @@ Table récapitulative à l'échelle des vidéos. Elle contient le statut du trai
 
 Table détaillée contenant une ligne par phase frétillante détectée par WPM.
 
-Ces deux fichiers sont suivis avec Git LFS.
+Les deux fichiers de résultats WPM sont gérés avec Git LFS. Après un clonage du dépôt, Git LFS doit être installé pour récupérer leur contenu complet.
 
 
 ## Résultats statistiques
@@ -160,6 +165,9 @@ Les scripts de `Scripts/Pipeline_WPM/` correspondent à la chaîne utilisée pou
 
 
 
+### Configuration du pipeline
+
+Le pipeline nécessite l'accès aux vidéos originales et au serveur de calcul. Les paramètres propres à la machine sont définis par des variables d'environnement : `WPM_VIDEO_ROOT`, `WPM_USER`, `WPM_SERVER`, `WPM_PASSWORD_FILE`, `WPM_REMOTE`, `WPM_REMOTE_PYTHON` et `WINSCP_PATH`.
 
 ## Scripts Python d'analyse
 

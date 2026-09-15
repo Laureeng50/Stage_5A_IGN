@@ -19,6 +19,7 @@ remote_python = os.environ.get("WPM_REMOTE_PYTHON", "python")
 script_serveur = base / "03b_batch_serveur.py"
 lot_path = Path(sys.argv[1])
 hyper_dir = repo / "Calibration" / "Hyperparametres"
+video_root = Path(os.environ.get("WPM_VIDEO_ROOT", "."))
 
 if tmp.exists():
     shutil.rmtree(tmp)
@@ -48,6 +49,8 @@ df.to_csv(tmp_lot, sep=";", index=False, encoding="utf-8-sig")
 videos = []
 for i in df.index:
     chemin = Path(str(df.at[i, "chemin"]))
+    if not chemin.is_absolute():
+        chemin = video_root / chemin
     video = chemin if chemin.suffix.lower() == ".mp4" else chemin / str(df.at[i, "nom_fichier"])
     if not video.exists():
         raise FileNotFoundError(video)

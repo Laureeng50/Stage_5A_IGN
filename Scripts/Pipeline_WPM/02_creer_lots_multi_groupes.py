@@ -20,7 +20,7 @@ groupes = [
     ("nap-mag12552206", "2206_OK", ["ok"], "best_hyperparameters_2206_T1_DUR03_ED50_DX10_SLOPE1_60_GAP40_SR20.json")
 ]
 
-df_total = pd.read_csv(table, low_memory=False)
+df_total = pd.read_csv(table, sep=";", low_memory=False)
 df_total["commentaires"] = df_total["commentaires"].astype(str).str.replace("\xa0", " ", regex=False).str.strip()
 df_total["Exploitabilité"] = df_total["Exploitabilité"].astype(str).str.strip()
 resume = []

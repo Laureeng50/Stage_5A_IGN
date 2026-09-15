@@ -6,7 +6,7 @@ df <- read.csv(file.path("Données", "dataset_videos_meteo.csv"), sep = ";")
 out <- file.path("Resultats", "analyse_temporelle")
 dir.create(out, recursive = TRUE, showWarnings = FALSE)
 
-df$datetime_video <- as.POSIXct(df$datetime_video)
+df$datetime_video <- as.POSIXct(df$datetime_video, format = "%Y-%m-%d %H:%M:%S", tz = "Europe/Paris")
 df <- df[df$statut %in% c("reussite", "reussite_sans_phase"), ]
 df$ruche <- gsub("nap-mag1255", "", df$ruche)
 df$annee <- as.numeric(format(df$datetime_video, "%Y"))
