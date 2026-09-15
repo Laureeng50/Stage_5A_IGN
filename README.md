@@ -61,7 +61,6 @@ Série météorologique harmonisée construite à partir des données Infoclimat
 
 Jeu de données utilisé pour les analyses temporelles et météorologiques. Chaque ligne correspond à une vidéo et regroupe les sorties WPM, les informations temporelles, le groupe technique et les variables météorologiques associées.
 
-Les fichiers météo sources ne sont pas inclus dans ce dépôt. Ils sont nécessaires uniquement pour relancer les étapes de préparation et de comparaison des deux stations. Les fichiers intermédiaires `infoclimat_prepare.csv` et `mr_prepare.csv` sont générés par les scripts et ne sont pas versionnés.
 
 ## Résultats WPM
 
