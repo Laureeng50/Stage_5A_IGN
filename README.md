@@ -81,12 +81,6 @@ Table récapitulative à l'échelle des vidéos. Elle contient le statut du trai
 
 Table détaillée contenant une ligne par phase frétillante détectée par WPM.
 
-<<<<<<< HEAD
-Les deux fichiers de résultats WPM sont gérés avec Git LFS. Après un clonage du dépôt, Git LFS doit être installé pour récupérer leur contenu complet.
-
-=======
->>>>>>> 0c78b64ac23ecddd2d093cc9323ba6272498d77b
-
 ## Résultats statistiques
 
 Le dossier `Resultats/Statistiques/` regroupe les principales tables produites pendant les analyses et utilisées pour les résultats et les annexes du mémoire. Elles sont conservées afin de garder une trace directe des sorties statistiques sans devoir relancer les modèles.
