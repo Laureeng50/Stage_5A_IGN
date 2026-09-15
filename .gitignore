@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Fichiers privés / locaux
+mdp_winscp.txt
+*.mp4
+en_cours/
