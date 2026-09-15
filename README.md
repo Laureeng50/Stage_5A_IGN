@@ -77,8 +77,6 @@ Table récapitulative à l'échelle des vidéos. Elle contient le statut du trai
 
 Table détaillée contenant une ligne par phase frétillante détectée par WPM.
 
-Ces deux fichiers sont suivis avec Git LFS.
-
 
 ## Résultats statistiques
 
