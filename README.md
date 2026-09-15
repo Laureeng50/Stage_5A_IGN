@@ -200,8 +200,8 @@ Python : `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `statsmodels`.
 R : `glmmTMB`, `mgcv`, `DHARMa`, `splines`, `ggplot2`.
 
 
-## Données archivées
+## Données de calibration
 
-Les vidéos utilisées pour la calibration manuelle sont déposées sur Zenodo.
+Les données utilisées pour la calibration du WPM sont archivées sur Zenodo :
 
-DOI Zenodo : à ajouter.
+https://doi.org/10.5281/zenodo.21488928
