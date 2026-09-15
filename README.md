@@ -1,4 +1,4 @@
-# Stage ingénieure de recherche IGN 
+# Stage Ingénieure de Recherche IGN 
 
 Ce dépôt regroupe les principaux scripts, données dérivées et résultats produits pendant mon stage de fin d'études au LASTIG (IGN), dans le cadre du projet DANSE.
 
