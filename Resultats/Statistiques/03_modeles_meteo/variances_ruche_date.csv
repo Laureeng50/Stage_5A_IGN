@@ -1,0 +1,17 @@
+"modele","reponse","source","vent","version","variance_ruche_date","SD_ruche_date"
+"presence_IC_moyen_complet","presence","IC","moyen","complet",2.34257137681097,1.53054610411153
+"intensite_IC_moyen_complet","intensite","IC","moyen","complet",0.250246333437458,0.500246272787173
+"presence_IC_rafale_max_complet","presence","IC","rafale_max","complet",2.35432108330521,1.53437970636515
+"intensite_IC_rafale_max_complet","intensite","IC","rafale_max","complet",0.249804193297996,0.49980415494271
+"presence_MR_moyen_complet","presence","MR","moyen","complet",1.83293306427879,1.35385858355989
+"intensite_MR_moyen_complet","intensite","MR","moyen","complet",0.22768688030846,0.477165464287243
+"presence_MR_rafale_max_complet","presence","MR","rafale_max","complet",1.83334512387788,1.35401075471278
+"intensite_MR_rafale_max_complet","intensite","MR","rafale_max","complet",0.227936750784252,0.477427220405636
+"presence_IC_moyen_sans_2202_2024","presence","IC","moyen","sans_2202_2024",1.80691253319022,1.34421446696211
+"intensite_IC_moyen_sans_2202_2024","intensite","IC","moyen","sans_2202_2024",0.2564693733522,0.50642805348065
+"presence_IC_rafale_max_sans_2202_2024","presence","IC","rafale_max","sans_2202_2024",1.80505254806028,1.34352244047514
+"intensite_IC_rafale_max_sans_2202_2024","intensite","IC","rafale_max","sans_2202_2024",0.255787650616094,0.505754535932298
+"presence_MR_moyen_sans_2202_2024","presence","MR","moyen","sans_2202_2024",1.68535251065012,1.29821127350294
+"intensite_MR_moyen_sans_2202_2024","intensite","MR","moyen","sans_2202_2024",0.227454516037868,0.47692191817725
+"presence_MR_rafale_max_sans_2202_2024","presence","MR","rafale_max","sans_2202_2024",1.67358573020357,1.29367141508328
+"intensite_MR_rafale_max_sans_2202_2024","intensite","MR","rafale_max","sans_2202_2024",0.227780047118773,0.477263079568044

@@ -1,0 +1,19 @@
+terme;k';edf;k-index;p-value;ruche;composante
+s(jour_annee);14;7.028375878442968;0.9120904799635093;0;Ruche 2202;Presence
+s(heure);7;3.4550556652904674;0.877047099528308;0;Ruche 2202;Presence
+s(date_f);387;165.4304178478816;NA;NA;Ruche 2202;Presence
+s(jour_annee);14;12.063829525151144;0.9396564650820909;0.04;Ruche 2202;Intensite_positive
+s(heure);7;2.022983610912208;0.8570765431791175;0;Ruche 2202;Intensite_positive
+s(date_f);301;133.808548736996;NA;NA;Ruche 2202;Intensite_positive
+s(jour_annee);14;2.5939061126745013;0.9215729236179341;0.6175;Ruche 2203;Presence
+s(heure);7;3.5175330341803073;0.9137101775193144;0.5075;Ruche 2203;Presence
+s(date_f);143;19.319090033745198;NA;NA;Ruche 2203;Presence
+s(jour_annee);14;12.427190595038152;0.8711041011403118;0;Ruche 2203;Intensite_positive
+s(heure);7;4.17559835687928;0.8876661012479031;0;Ruche 2203;Intensite_positive
+s(date_f);143;99.50437776188251;NA;NA;Ruche 2203;Intensite_positive
+s(jour_annee);14;1.0000153085549295;0.7908165987986763;0;Ruche 2206;Presence
+s(heure);7;4.945041085869325;0.7825405443109503;0;Ruche 2206;Presence
+s(date_f);209;100.79465961890942;NA;NA;Ruche 2206;Presence
+s(jour_annee);14;12.353047878433985;0.7064479020208011;0;Ruche 2206;Intensite_positive
+s(heure);7;4.309216415045754;0.7248390018790988;0;Ruche 2206;Intensite_positive
+s(date_f);203;146.79834377333623;NA;NA;Ruche 2206;Intensite_positive

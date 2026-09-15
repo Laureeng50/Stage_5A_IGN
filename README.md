@@ -19,7 +19,12 @@ Stage_5A_IGN/
 │   └── dataset_videos_meteo.csv
 ├── Resultats/
 │   ├── resultats_WPM_complet.csv
-│   └── waggle_phases_WPM_complet.csv
+│   ├── waggle_phases_WPM_complet.csv
+│   └── Statistiques/
+│       ├── 01_temporel/
+│       ├── 02_comparaison_meteo/
+│       ├── 03_modeles_meteo/
+│       └── 04_pluie/
 ├── Scripts/
 │   ├── Pipeline_WPM/
 │   ├── Analyses_python/
@@ -61,7 +66,6 @@ Série météorologique harmonisée construite à partir des données Infoclimat
 
 Jeu de données utilisé pour les analyses temporelles et météorologiques. Chaque ligne correspond à une vidéo et regroupe les sorties WPM, les informations temporelles, le groupe technique et les variables météorologiques associées.
 
-Les fichiers météo sources ne sont pas inclus dans ce dépôt. Ils sont nécessaires uniquement pour relancer les étapes de préparation et de comparaison des deux stations. Les fichiers intermédiaires `infoclimat_prepare.csv` et `mr_prepare.csv` sont générés par les scripts et ne sont pas versionnés.
 
 ## Résultats WPM
 
@@ -74,6 +78,70 @@ Table récapitulative à l'échelle des vidéos. Elle contient le statut du trai
 Table détaillée contenant une ligne par phase frétillante détectée par WPM.
 
 Ces deux fichiers sont suivis avec Git LFS.
+
+
+## Résultats statistiques
+
+Le dossier `Resultats/Statistiques/` regroupe les principales tables produites pendant les analyses et utilisées pour les résultats et les annexes du mémoire. Elles sont conservées afin de garder une trace directe des sorties statistiques sans devoir relancer les modèles.
+
+### `01_temporel/`
+
+| Fichier | Contenu |
+| --- | --- |
+| `statistiques_saisonnieres.csv` | Statistiques hebdomadaires de présence et d'intensité par ruche et année. |
+| `statistiques_horaires.csv` | Statistiques de présence et d'intensité selon l'heure. |
+| `diagnostics_glmm_dharma.csv` | Diagnostics DHARMa des modèles temporels. |
+| `diagnostics_k_gam.csv` | Contrôle de la dimension des lissages des GAM. |
+| `profils_horaires_observes.csv` | Profils horaires observés par groupe technique. |
+| `profils_mensuels_observes.csv` | Profils mensuels observés par groupe technique. |
+| `sensibilite_globale_groupes.csv` | Tests globaux du modèle d'intensité intégrant les groupes techniques. |
+| `groupes_g1_g9.csv` | Résumé descriptif des neuf groupes techniques. |
+| `tests_gam_par_ruche.csv` | Résultats des GAM temporels par ruche. |
+| `tests_glmm_lrt_par_ruche.csv` | Tests du rapport de vraisemblance des GLMM temporels. |
+
+### `02_comparaison_meteo/`
+
+| Fichier | Contenu |
+| --- | --- |
+| `donnees_comparees_mr_ic_30min.csv` | Données MR et Infoclimat appariées à 30 minutes sur la période commune. |
+| `resume_comparaison_mr_ic.csv` | Biais, MAE, RMSE et corrélations entre MR et Infoclimat. |
+| `resume_direction_vent.csv` | Écarts angulaires entre les directions du vent des deux sources. |
+| `resume_pluie_journaliere.csv` | Comparaison des précipitations après agrégation journalière. |
+
+### `03_modeles_meteo/`
+
+| Fichier | Contenu |
+| --- | --- |
+| `correlations_meteo.csv` | Corrélations de Spearman utilisées pour le contrôle de la colinéarité. |
+| `vif_modeles.csv` | VIF des variables utilisées dans les modèles météorologiques. |
+| `vif_temperature_humidite.csv` | Contrôle complémentaire du VIF pour la température et l'humidité. |
+| `resume_modeles.csv` | Résumé des 16 modèles météorologiques principaux. |
+| `coefficients_modeles.csv` | Coefficients, rapports d'effet et intervalles des modèles principaux. |
+| `diagnostics_modeles.csv` | Diagnostics des 16 modèles météorologiques. |
+| `tests_globaux_modeles.csv` | Tests globaux des effets à plusieurs coefficients. |
+| `variances_ruche_date.csv` | Variance de l'intercept aléatoire ruche × date. |
+| `contributions_propres.csv` | Tests de contribution propre des variables non linéaires. |
+| `tests_nonlinearite.csv` | Comparaison entre formulations linéaires et splines. |
+| `predictions_courbes.csv` | Prédictions utilisées pour représenter les relations non linéaires. |
+| `tests_nonlinearite_vent.csv` | Tests des formes non linéaires du vent. |
+| `points_rupture.csv` | Points de rupture estimés pour les variables testées. |
+| `predictions_points_rupture.csv` | Prédictions associées aux modèles avec point de rupture. |
+| `profils_points_rupture.csv` | Profils de vraisemblance utilisés pour l'incertitude des points de rupture. |
+| `profils_second_point_temperature.csv` | Profils testés pour un second point de rupture thermique. |
+| `second_point_temperature.csv` | Résumé des essais d'un second point de rupture pour la température. |
+
+### `04_pluie/`
+
+| Fichier | Contenu |
+| --- | --- |
+| `descriptif_pluie.csv` | Description des observations associées à des précipitations. |
+| `modeles_pluie_deux_parties.csv` | Résultats des modèles pluie sèche/pluvieuse et quantité positive. |
+| `coefficients_classes_pluie.csv` | Coefficients des classes de précipitations par rapport au temps sec. |
+| `tests_globaux_classes_pluie.csv` | Tests globaux des classes de précipitations. |
+| `descriptif_classes_pluie.csv` | Statistiques descriptives des classes de pluie. |
+| `seuils_pluie.csv` | Valeurs des seuils de pluie utilisés pour les classes principales. |
+| `sensibilite_seuils_q75_q90_q95.csv` | Analyse de sensibilité à plusieurs quantiles de pluie forte. |
+| `tendance_pluie_positive.csv` | Test d'une relation continue avec la quantité de pluie parmi les épisodes pluvieux. |
 
 ## Scripts du pipeline WPM
 
@@ -90,9 +158,8 @@ Les scripts de `Scripts/Pipeline_WPM/` correspondent à la chaîne utilisée pou
 | `03d_nettoyage.py` | Suppression des fichiers temporaires du serveur après validation de la récupération. |
 | `04_lancer_tous_les_lots.py` | Parcours de l'ensemble des lots et reprise uniquement des lots non validés. |
 
-Les fichiers `inventaire_videos.csv` et `Table_qualite_videos.xlsx` utilisés par le premier script ne sont pas versionnés, car `BDD_inventaire.csv` est directement fourni dans le dépôt.
 
-Les paramètres propres au serveur ne sont pas enregistrés dans le dépôt. Les scripts utilisent les variables d'environnement `WPM_USER`, `WPM_SERVER`, `WPM_REMOTE`, `WPM_REMOTE_PYTHON`, `WPM_PASSWORD_FILE` et, si nécessaire, `WINSCP_PATH` et `WPM_COMMAND`.
+
 
 ## Scripts Python d'analyse
 
@@ -122,16 +189,15 @@ Les analyses statistiques principales sont regroupées dans `Scripts/Analyse_R/`
 
 Les scripts R utilisent des chemins relatifs et doivent être lancés depuis la racine du dépôt.
 
-## Dépendances principales
+## Bibliothèques principales
 
 Python : `pandas`, `numpy`, `matplotlib`, `scikit-learn`, `statsmodels`.
 
 R : `glmmTMB`, `mgcv`, `DHARMa`, `splines`, `ggplot2`.
 
-Le traitement vidéo nécessite également le Waggle Phase Mapper.
 
 ## Données archivées
 
-Les vidéos de calibration et les fichiers de données destinés à l'archivage scientifique sont déposés séparément sur Zenodo.
+Les vidéos utilisées pour la calibration manuelle sont déposées sur Zenodo.
 
 DOI Zenodo : à ajouter.

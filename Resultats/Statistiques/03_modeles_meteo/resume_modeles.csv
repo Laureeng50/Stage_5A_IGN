@@ -1,0 +1,17 @@
+"modele","reponse","source","vent","version","n","AIC","BIC","logLik","convergence","Hessienne"
+"presence_IC_moyen_complet","presence","IC","moyen","complet",8455,4982.46891064645,5193.74430848643,-2461.23445532323,TRUE,TRUE
+"intensite_IC_moyen_complet","intensite","IC","moyen","complet",5779,44274.4748681959,44480.9964322218,-22106.237434098,TRUE,TRUE
+"presence_IC_rafale_max_complet","presence","IC","rafale_max","complet",8458,4984.07041352276,5195.35645406373,-2462.03520676138,TRUE,TRUE
+"intensite_IC_rafale_max_complet","intensite","IC","rafale_max","complet",5781,44285.2868811026,44491.8191717721,-22111.6434405513,TRUE,TRUE
+"presence_MR_moyen_complet","presence","MR","moyen","complet",6130,3510.10936857171,3691.57501935283,-1728.05468428586,TRUE,TRUE
+"intensite_MR_moyen_complet","intensite","MR","moyen","complet",4346,34130.6686487092,34309.224961212,-17037.3343243546,TRUE,TRUE
+"presence_MR_rafale_max_complet","presence","MR","rafale_max","complet",6130,3510.29977658882,3691.76542736994,-1728.14988829441,TRUE,TRUE
+"intensite_MR_rafale_max_complet","intensite","MR","rafale_max","complet",4346,34124.4356482818,34302.9919607847,-17034.2178241409,TRUE,TRUE
+"presence_IC_moyen_sans_2202_2024","presence","IC","moyen","sans_2202_2024",6746,3447.23719831446,3644.92164376748,-1694.61859915723,TRUE,TRUE
+"intensite_IC_moyen_sans_2202_2024","intensite","IC","moyen","sans_2202_2024",5417,43108.6490925435,43306.5680156133,-21524.3245462718,TRUE,TRUE
+"presence_IC_rafale_max_sans_2202_2024","presence","IC","rafale_max","sans_2202_2024",6749,3447.66504729472,3645.36238641228,-1694.83252364736,TRUE,TRUE
+"intensite_IC_rafale_max_sans_2202_2024","intensite","IC","rafale_max","sans_2202_2024",5419,43119.0468904585,43316.9768877255,-21529.5234452293,TRUE,TRUE
+"presence_MR_moyen_sans_2202_2024","presence","MR","moyen","sans_2202_2024",5303,2839.16768171601,3016.72043709871,-1392.583840858,TRUE,TRUE
+"intensite_MR_moyen_sans_2202_2024","intensite","MR","moyen","sans_2202_2024",4234,33825.6571445452,34003.4824131926,-16884.8285722726,TRUE,TRUE
+"presence_MR_rafale_max_sans_2202_2024","presence","MR","rafale_max","sans_2202_2024",5303,2837.96569674556,3015.51845212827,-1391.98284837278,TRUE,TRUE
+"intensite_MR_rafale_max_sans_2202_2024","intensite","MR","rafale_max","sans_2202_2024",4234,33819.0124971719,33996.8377658194,-16881.506248586,TRUE,TRUE
